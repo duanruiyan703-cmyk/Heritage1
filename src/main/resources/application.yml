@@ -1,0 +1,95 @@
+spring:
+  application:
+    name: heritage
+
+  # 数据源配置
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/heritage_db?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false&serverTimezone=GMT%2b8&allowPublicKeyRetrieval=true
+    username: root
+    password: yszaygz99
+
+  # 安全配置
+  security:
+    user:
+      name: admin
+      password: yszaygz99
+  main:
+    allow-bean-definition-overriding: true
+  # 邮件配置
+  mail:
+    host: smtp.qq.com
+    username: 1796145608@qq.com
+    password: kutsaiadfvqyjajc
+    default-encoding: utf-8
+    port: 587
+    properties:
+      mail:
+        debug: true
+        smtp:
+          auth: true
+          ssl:
+            enable: true
+            protocols: TLSv1.2
+          socketFactory:
+            class: javax.net.ssl.SSLSocketFactory
+            port: 465
+
+  # Web配置
+  mvc:
+    static-path-pattern: /**  # 允许根路径访问静态资源
+  web:
+    resources:
+      static-locations: classpath:/static/, file:./files/  # 添加files目录
+
+  # 文件上传配置
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 500MB
+      max-request-size: 500MB
+
+  # JSON配置
+  jackson:
+    default-property-inclusion: non_empty
+
+  # Spring AI配置
+  ai:
+    openai:
+      api-key: sk-chnuxpaiqznoopmibumcpsryvuouilyghkoexawhemgxoepa
+      base-url: https://api.siliconflow.cn
+      chat:
+        options:
+          model: deepseek-ai/DeepSeek-V4-Flash
+          temperature: 0.7
+        completions-path: /v1/chat/completions
+
+# 服务器配置
+server:
+  port: 8889
+  servlet:
+    context-path: /
+
+# MyBatis-Plus配置
+mybatis-plus:
+  mapper-locations: classpath:/mapper/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+
+
+# JWT配置
+jwt:
+  secret: MySecretKeyForJWT2025!@#$%^&*()_+SecureKeyHere
+  expiration: 86400000  # 24小时（毫秒）
+  refresh-expiration: 604800000  # 7天（毫秒）
+  header: Authorization  # token头部名称
+  token-prefix: "Bearer "  # token前缀
+
+
+# 文件管理配置
+file:
+  upload:
+    path: ./files
+    maxSize: 524288000  # 500MB (500 * 1024 * 1024)
